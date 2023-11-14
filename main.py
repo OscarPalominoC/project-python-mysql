@@ -1,32 +1,32 @@
 """
-Proyecto Python y MySQL
-- Abrir asistente
-- Login o registro
-- Si elegimos registro, creará un usuario en la DB
-- Si elegimos login, identifica al usuario y muestra el siguiente menú:
-    - Crear nota, mostrar nota, borrar nota
+Project Python and MySQL
+- Open assisstant
+- Login o register
+- If we choose register, it will create an user in the DB
+- If we choose login, identify the user and show the following menu:
+    - Create note, show notes, delete note
 """
 
 import database
 from getpass import getpass
 from utils import validate_email
-from usuarios.acciones import Acciones
+from users.actions import Actions
 
 print("""
-Acciones disponibles:
-    - Registro
+Actions Available:
+    - Register
     - Login
 """)
-hazEl = Acciones()
-accion = input("¿Qué quieres hacer? ")
+Do = Actions()
+action = input("What would you like to do? ")
 
-if accion.lower() == "registro":
-    print("Ok! Vamos a registrarte en el sistema...")
-    hazEl.registro()
+if action.lower() == "register":
+    print("Ok! Let's register us in the system...")
+    Do.register()
 
-elif accion.lower() == "login":
-    print("Ok! Vamos a iniciar sesión en el sistema...")
-    hazEl.login()
+elif action.lower() == "login":
+    print("Ok! Let us login in the system...")
+    Do.login()
 
 else:
-    print('Esa acción no está disponible...')
+    print('That option is not available...')

@@ -7,8 +7,11 @@ PASSWORD = config('PASSWORD')
 DATABASE = config('DATABASE')
 PORT = config('PORT')
 
-# Conectando a la base de datos
+# Creating the connection to the database
 def db_connection():
+    """
+    Create the connection to the database
+    """
     connection = mysql.connector.connect(
         host = HOST,
         user = USER,

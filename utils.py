@@ -1,7 +1,6 @@
 # Validate email using regex
 import re
 
-regex = r'[A-Za-z0-9._%+-]+@+[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
 
 def validate_email(email: str):
     """
@@ -13,6 +12,7 @@ def validate_email(email: str):
     Returns:
         Bool: True if it is a valid email. False if it is an invalid email.
     """
+    regex = r'[A-Za-z0-9._%+-]+@+[A-Za-z0-9.-]+\.[A-Za-z]{2,}'
     if re.match(regex, email):
         return True
     return False
