@@ -2,9 +2,6 @@ from database import db_connection
 from datetime import datetime
 import hashlib
 
-connection = db_connection()
-cursor = connection.cursor(buffered=True)
-
 class User:
     """
     User class.
@@ -35,9 +32,10 @@ class User:
         Returns:
             [Rows Produced, User]: List. It contains the rows affected and User object
         """
+        connection, cursor = db_connection()
         fecha = datetime.now()
 
-        # Cifrar contraseña
+        # Encrypt password
         encrypted = hashlib.sha256()
         encrypted.update(self.password.encode('utf8'))
 
@@ -50,9 +48,32 @@ class User:
             result = [cursor.rowcount, self]
         except:
             result = [0, self]
+        finally:
+            cursor.close()
+            connection.close()
 
         return result
     
 
     def identify(self):
-        pass
+        """
+        Identify the user in the database
+        """
+        connection, cursor = db_connection()
+        sql = "SELECT * FROM users WHERE email = %s AND password = %s"
+        encrypted = hashlib.sha256()
+        encrypted.update(self.password.encode('utf8'))
+
+        # Information for query
+        user = (self.email, encrypted.hexdigest())
+        try:
+            cursor.execute(sql, user)
+            result = cursor.fetchone()
+            
+        except:
+            print('Invalid email or password')
+        finally:
+            cursor.close()
+            connection.close()
+
+        return result

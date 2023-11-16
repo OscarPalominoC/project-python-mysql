@@ -20,7 +20,9 @@ def db_connection():
         port = PORT
     )
 
-    return connection
+    cursor = connection.cursor(buffered=True)
+
+    return [connection, cursor]
 
 
 
